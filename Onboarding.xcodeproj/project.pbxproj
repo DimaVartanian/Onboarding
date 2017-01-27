@@ -119,7 +119,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0820;
-				ORGANIZATIONNAME = LearnVest;
+				ORGANIZATIONNAME = DimaVartanian;
 				TargetAttributes = {
 					3232DDC11E38294400385DF4 = {
 						CreatedOnToolsVersion = 8.2.1;
