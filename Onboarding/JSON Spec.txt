@@ -1,0 +1,56 @@
+key:
+Object types are indicated in uppercase letters
+A question mark indicates an optional key/value
+
+
+server payload :
+{
+	"onboarding_flow" : [SCREEN]
+}
+
+SCREEN :
+{
+	"type" : STRING // "input" or "takeaway"
+	header : TEXT_WITH_FORMAT
+	required_condition : CONDITION_GROUP? // every condition in the group must be met for this screen to be shown
+	inputs : [INPUT]? // only for input type
+	takeaways : [TEXT_WITH_FORMAT]? // only for takeaway type
+	continue_prompt : STRING?
+}
+
+INPUT :
+{
+	"identifier" : STRING
+	"question" : FORMAT_TEXT
+	"answer_parameters" :
+	{
+		"type" : STRING // "text", "int"
+		"choices" : [STRING or INT]?
+	}
+}
+
+CONDITION :
+{
+	"answer_identifier" : STRING // references the answer of an Input with this identifier
+	"comparison" : STRING // "greater_than", "less_than", "equal_to"
+	"comparison_value" : STRING or INT depending on the type of answer
+	// greater_than and less_than work with int answer types
+	// equal_to works for all answer types
+}
+
+CONDITION_GROUP :
+{
+	"conditions" : [CONDITION]? // only if condition_groups is nil
+	"condition_groups" = [CONDITION_GROUP]? //allowing nested condition groups. only if conditions is nil
+	"function" : STRING // accepted values are: "AND", "OR", or "NOT"
+}
+
+TEXT_WITH_FORMAT : 
+{
+	"text"  : STRING
+	"format_specifiers" :
+	[{
+		"placeholder" : STRING // string to replace
+		"answer_identifier" : STRING // references the answer of an INPUT with this identifier
+	}]?
+}

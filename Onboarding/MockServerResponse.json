@@ -1,0 +1,380 @@
+{
+	"onboarding_flow" :
+	[
+		{
+			"type" : "input",
+			"header" :
+			{
+				"text" : "Let's start with the basics! What is your…"
+			},
+			"inputs" :
+			[
+				{
+					"identifier" : "16b18a88-9e4b-49c5-8a66-307a2aa42d29",
+					"question" :
+					{
+						"text" : "First name"
+					},
+					"answer_parameters" :
+					{
+						"type" : "text"
+					}
+				},
+				{
+					"identifier" : "a5a4336c-543a-4a81-a6ac-b4b77e230813",
+					"question" :
+					{
+						"text" : "Age"
+					},
+					"answer_parameters" :
+					{
+						"type" : "int"
+					}
+				},
+				{
+					"identifier" : "f5411821-de2b-4c58-94a3-c76581fdb47f",
+					"question" :
+					{
+						"text" : "Job title"
+					},
+					"answer_parameters" :
+					{
+						"type" : "text"
+					}
+				},
+				{
+					"identifier" : "47a2f7bc-a11b-49e5-bb87-d683e9fa9c36",
+					"question" :
+					{
+						"text" : "Location"
+					},
+					"answer_parameters" :
+					{
+						"type" : "text"
+					}
+				}
+			],
+			"continue_prompt" : "Continue",
+		},
+		{
+			"type" : "input",
+			"header" :
+			{
+				"text" : "Hi {0}! Let’s talk about…",
+				"format_specifiers" :
+				[
+					{
+						"placeholder" : "{0}",
+						"answer_identifier" : "16b18a88-9e4b-49c5-8a66-307a2aa42d29"
+					}
+				]
+			},
+			"inputs" :
+			[
+				{
+					"identifier" : "d0144d10-620b-443a-86f5-08e16666508b",
+					"question" :
+					{
+						"text" : "Your yearly income"
+					},
+					"answer_parameters" :
+					{
+						"type" : "text",
+						"choices" : 
+						[
+							"$0 - $12,000", 
+							"$12,001 - $30,000", 
+							"$30,001 - $50,000",
+							"$50,001 - $100,000",
+							"$100,001+"
+						]
+					}
+				}
+			],
+			"continue_prompt" : "Continue",
+		},
+		{
+			"type" : "takeaway",
+			"header" :
+			{
+				"text" : "Congratulations!"
+			},
+			"required_condition" :
+			{
+				"conditions" : 
+				[
+					{
+						"answer_identifier" : "a5a4336c-543a-4a81-a6ac-b4b77e230813",
+						"comparison" : "less_than",
+						"comparison_value" : 30
+					},
+					{
+						"answer_identifier" : "d0144d10-620b-443a-86f5-08e16666508b",
+						"comparison" : "equal_to",
+						"comparison_value" : "$100,001+"
+					}
+				],
+				"function" : "AND"
+			},
+			"takeaways" : 
+			[
+				{
+					"text" : "You are way ahead of the curve for earning so much at only {0} years old!",
+					"format_specifiers" :
+					[
+						{
+							"placeholder" : "{0}",
+							"answer_identifier" : "a5a4336c-543a-4a81-a6ac-b4b77e230813"
+						}
+					]
+				}
+			],
+			"continue_prompt" : "Continue"
+		},
+		{
+			"type" : "takeaway",
+			"header" :
+			{
+				"text" : "Sorry."
+			},
+			"required_condition" :
+			{
+				"conditions" : 
+				[
+					{
+						"answer_identifier" : "d0144d10-620b-443a-86f5-08e16666508b",
+						"comparison" : "equal_to",
+						"comparison_value" : "$0 - $12,000"
+					}
+				],
+				"function" : "AND"
+			},
+			"takeaways" : 
+			[
+				{
+					"text" : "Unfortunately, this app won't work for you because you earn less than $12,000 per year.",
+				}
+			],
+		},
+		{
+			"type" : "input",
+			"header" :
+			{
+				"text" : "Hi {0}! Let’s talk about…",
+				"format_specifiers" :
+				[
+					{
+						"placeholder" : "{0}",
+						"answer_identifier" : "16b18a88-9e4b-49c5-8a66-307a2aa42d29"
+					}
+				]
+			},
+			"inputs" :
+			[
+				{
+					"identifier" : "309e61ae-5434-4efc-baf5-c633d006977a",
+					"question" :
+					{
+						"text" : "What is your biggest financial worry?"
+					},
+					"answer_parameters" :
+					{
+						"type" : "text",
+						"choices" : 
+						[
+							"Saving for retirement", 
+							"Paying off debt", 
+							"Buying a home"
+						]
+					}
+				}
+			],
+			"continue_prompt" : "Continue",
+		},
+		{
+			"type" : "input",
+			"header" :
+			{
+				"text" : "Saving for retirement"
+			},
+			"required_condition" :
+			{
+				"conditions" : 
+				[
+					{
+						"answer_identifier" : "309e61ae-5434-4efc-baf5-c633d006977a",
+						"comparison" : "equal_to",
+						"comparison_value" : "Saving for retirement"
+					}
+				],
+				"function" : "AND"
+			},
+			"inputs" :
+			[
+				{
+					"identifier" : "ec4e2b9b-2952-4360-bc6d-546c3b1c8823",
+					"question" :
+					{
+						"text" : "How much have you saved so far?"
+					},
+					"answer_parameters" :
+					{
+						"type" : "text"
+					}
+				},
+				{
+					"identifier" : "eae63c3a-c21d-47a4-a30c-72475c2d5e25",
+					"question" :
+					{
+						"text" : "What age do you want to retire at?"
+					},
+					"answer_parameters" :
+					{
+						"type" : "int"
+					}
+				}
+			],
+			"continue_prompt" : "Continue",
+		},
+		{
+			"type" : "input",
+			"header" :
+			{
+				"text" : "Paying off debt"
+			},
+			"required_condition" :
+			{
+				"conditions" : 
+				[
+					{
+						"answer_identifier" : "309e61ae-5434-4efc-baf5-c633d006977a",
+						"comparison" : "equal_to",
+						"comparison_value" : "Paying off debt"
+					}
+				],
+				"function" : "AND"
+			},
+			"inputs" :
+			[
+				{
+					"identifier" : "2d26314c-6419-42a8-9895-c389eba0eadd",
+					"question" :
+					{
+						"text" : "How much debt do you have?"
+					},
+					"answer_parameters" :
+					{
+						"type" : "text"
+					}
+				}
+			],
+			"continue_prompt" : "Continue",
+		},
+		{
+			"type" : "input",
+			"header" :
+			{
+				"text" : "Buying a home"
+			},
+			"required_condition" :
+			{
+				"conditions" : 
+				[
+					{
+						"answer_identifier" : "309e61ae-5434-4efc-baf5-c633d006977a",
+						"comparison" : "equal_to",
+						"comparison_value" : "Buying a home"
+					}
+				],
+				"function" : "AND"
+			},
+			"inputs" :
+			[
+				{
+					"identifier" : "441e248c-1989-4a50-b902-8eb26489024b",
+					"question" :
+					{
+						"text" : "How much does the home that you want to buy cost?"
+					},
+					"answer_parameters" :
+					{
+						"type" : "text"
+					}
+				},
+				{
+					"identifier" : "3901f7c8-108a-49a5-8b4a-1192e1a9fd33",
+					"question" :
+					{
+						"text" : "How much have you saved so far?"
+					},
+					"answer_parameters" :
+					{
+						"type" : "text"
+					}
+				}
+			],
+			"continue_prompt" : "Continue",
+		},
+		{
+			"type" : "takeaway",
+			"header" : 
+			{
+				"text" : "All done {0}! Here are your results.",
+				"format_specifiers" :
+				[
+					{
+						"placeholder" : "{0}",
+						"answer_identifier" : "16b18a88-9e4b-49c5-8a66-307a2aa42d29"
+					}
+				]
+			},
+			"takeaways" : 
+			[
+				{
+					"text" : "You are {0} years old.",
+					"format_specifiers" :
+					[
+						{
+							"placeholder" : "{0}",
+							"answer_identifier" : "a5a4336c-543a-4a81-a6ac-b4b77e230813"
+						}
+					]
+				},
+				{
+					"text" : "You are a {0} located in {1}.",
+					"format_specifiers" :
+					[
+						{
+							"placeholder" : "{0}",
+							"answer_identifier" : "f5411821-de2b-4c58-94a3-c76581fdb47f"
+						},
+						{
+							"placeholder" : "{1}",
+							"answer_identifier" : "47a2f7bc-a11b-49e5-bb87-d683e9fa9c36"
+						}
+					]
+				},
+				{
+					"text" : "Your yearly income is about {0}",
+					"format_specifiers" :
+					[
+						{
+							"placeholder" : "{0}",
+							"answer_identifier" : "d0144d10-620b-443a-86f5-08e16666508b"
+						}
+					]
+				},
+				{
+					"text" : "Your biggest financial worry is {0}",
+					"format_specifiers" :
+					[
+						{
+							"placeholder" : "{0}",
+							"answer_identifier" : "309e61ae-5434-4efc-baf5-c633d006977a"
+						}
+					]
+				},
+			]
+		}
+	]
+}
